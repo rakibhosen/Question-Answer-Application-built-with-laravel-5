@@ -13,13 +13,15 @@
                  
              </div>
                
-                    <div class="card-body">
-                        @include('partials.messages')
-                    <form action="{{route('questions.store')}}" method="post">
-                        @include('questions._form',['buttonText' => "Ask Question"])
-                    </form>
-                 
-                    </div>
+            <div class="card-body">
+                @include('partials.messages')
+                <form action="{{route('questions.update',$question->id)}}" method="post">
+                    {{ method_field('PUT') }}
+                    @include('questions._form',['buttonText' => "Update Question"])
+                </form>
+            
+            </div>
+
             </div>
         </div>
     </div>
