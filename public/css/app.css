@@ -11687,11 +11687,7 @@ a.text-dark:focus {
   margin-top: 10px;
 }
 
-.media {
-  -webkit-box-shadow: -1px 1px 8px 1px #888888 !important;
-          box-shadow: -1px 1px 8px 1px #888888 !important;
-  padding: 0px 0px 10px 10px !important;
-}
+
 
 form.form-delete {
   display: inline;
