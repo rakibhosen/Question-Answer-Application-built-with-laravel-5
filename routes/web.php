@@ -22,4 +22,4 @@ Route::resource('questions','QuestionController')->except('show');
 Route::get('questions/{slug}','QuestionController@show')->name('questions.show');
 
 // Answer route
-Route::resource('answers','AnswerController');
+Route::resource('questions.answers','AnswersController')->except('index','create','delete');
