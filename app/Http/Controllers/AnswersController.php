@@ -9,6 +9,9 @@ use Illuminate\Http\Request;
 class AnswersController extends Controller
 {
 
+    public function show(){
+
+    }
 
     /**
      * Store a newly created resource in storage.
@@ -33,10 +36,7 @@ class AnswersController extends Controller
      * @param  \App\Answer  $answer
      * @return \Illuminate\Http\Response
      */
-    public function show(Answer $answer)
-    {
-        //
-    }
+
 
     /**
      * Show the form for editing the specified resource.
@@ -44,9 +44,14 @@ class AnswersController extends Controller
      * @param  \App\Answer  $answer
      * @return \Illuminate\Http\Response
      */
-    public function edit(Answer $answer)
+    public function edit(Question $question, Answer $answer)
     {
-        //
+        if(\Gate::denies('update-answer',$answer)){
+            
+            abort(403,"access denied");
+        };
+    
+        return view('answers.edit',compact('question','answer'));
     }
 
     /**
@@ -56,9 +61,13 @@ class AnswersController extends Controller
      * @param  \App\Answer  $answer
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Answer $answer)
+    public function update(Request $request,Question $question, Answer $answer)
     {
-        //
+       
+        $answer->update($request->validate([
+            'body'=>'required'
+        ]));
+        return redirect()->route('questions.show',$question->slug)->with('success','Your answer updated');
     }
 
     /**
@@ -69,6 +78,6 @@ class AnswersController extends Controller
      */
     public function destroy(Answer $answer)
     {
-        //
+        
     }
 }

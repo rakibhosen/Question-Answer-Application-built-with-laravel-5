@@ -25,21 +25,38 @@
                                   
                            </div>
                        <div class="media-body">   
-                     
-                           
-                                   {{ $answer->body }}
-                                   <div class="float-right  mt-3">
-                                           <span class="text-muted">Answered {{$question->created_date}}</span>
-                                           <div class="media">
-                                               <a href="{{$question->user->url}}" class="pr-2">
-                                                       <img src="{{$answer->user->avatar}}">
-                                                   </a>
-                                                   <div class="media-body">
-                                                       <a href="{{$answer->user->url}}">{{$answer->user->name}}</a>
-                                                   </div>
-                                           
-                                           </div>
-                                       </div>
+                          {{ $answer->body }}
+                        <div class="col-4">
+                            <div class="ml-auto">
+                                    @can('update-answer',$answer)
+                                    <a href="{{route('questions.answers.edit',[$question->id,$answer->id])}}"  class="btn btn-sm btn-outline-info">Edit</a>
+                                @endcan
+                                    
+                                @can('delete-answer',$answer)
+                                <form class="form-delete" action="{{ route('questions.answers.destroy',[$question->id,$answer->id]) }}" method="post">
+                                   @method('DELETE')
+                                    @csrf
+                                  <button type="submit" class="btn btn-sm btn-outline-danger" onclick="return confirm('Are You sure?')">Delete</button>
+                                    </form>
+                                    @endcan
+                            </div>
+                        </div>
+                        <div class="col-4"></div>
+                        <div class="col-4 mt-3">
+                                <span class="text-muted">Answered {{$question->created_date}}</span>
+                                <div class="media">
+                                    <a href="{{$question->user->url}}" class="pr-2">
+                                            <img src="{{$answer->user->avatar}}">
+                                        </a>
+                                        <div class="media-body">
+                                            <a href="{{$answer->user->url}}">{{$answer->user->name}}</a>
+                                        </div>
+                                
+                                </div>
+                            </div>
+                       </div>
+
+             
                        
                            
                            </div>       
@@ -50,6 +67,3 @@
                </div>
            </div>
         </div>
-     <div>
-  </div>
-</div>
