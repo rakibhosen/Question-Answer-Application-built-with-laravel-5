@@ -76,8 +76,13 @@ class AnswersController extends Controller
      * @param  \App\Answer  $answer
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Answer $answer)
+    public function destroy(Question $question, Answer $answer)
     {
-        
+        if(\Gate::denies('delete-answer',$answer)){
+            
+            abort(403,"access denied");
+        };
+        $answer->delete();
+        return back()->with('success',"Your question has been deleted");
     }
 }

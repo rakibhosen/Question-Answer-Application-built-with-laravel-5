@@ -26,6 +26,7 @@
                            </div>
                        <div class="media-body">   
                           {{ $answer->body }}
+                          <div class="row">
                         <div class="col-4">
                             <div class="ml-auto">
                                     @can('update-answer',$answer)
@@ -41,8 +42,9 @@
                                     @endcan
                             </div>
                         </div>
+
                         <div class="col-4"></div>
-                        <div class="col-4 mt-3">
+                        <div class="col-4 ">
                                 <span class="text-muted">Answered {{$question->created_date}}</span>
                                 <div class="media">
                                     <a href="{{$question->user->url}}" class="pr-2">
@@ -54,11 +56,10 @@
                                 
                                 </div>
                             </div>
+                        </div>
+                        
                        </div>
 
-             
-                       
-                           
                            </div>       
                        </div> 
                            <hr>

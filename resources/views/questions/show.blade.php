@@ -50,8 +50,10 @@
                 </div>
             </div>
         </div>
-    </div>
+ 
+    
 @include('answers.index')
 @include('answers.create')
 </div>
+
 @endsection
