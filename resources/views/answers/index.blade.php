@@ -18,17 +18,30 @@
                                <a title="this answer is not useful" class="vote-down off">
                                        <i class="fa fa-caret-down fa-3x"></i>
                                    </a>
-                                   <a title="mark as best answer (click again to undo)" class="{{$answer->status}} mt-2">
+                                   @can('accept',$answer)
+                                   <a title="mark as best answer (click again to undo)" class="{{$answer->status}} mt-2" onclick="event.preventDefault(); document.getElementById('accept-answer-{{ $answer->id }}').submit();">
                                            <i class="fa fa-check fa-2x"></i>
                                           
                                    </a>
+                                <form id="accept-answer-{{$answer->id}}" action="{{route('answers.accept',$answer->id)}}" method="post" style="display: none;">
+                                    @csrf
+
+                                   </form>
+                                   @else
+                                     @if($answer->is_best)
+                                     <a title="mark as best answer (click again to undo)" class="{{$answer->status}} mt-2">
+                                        <i class="fa fa-check fa-2x"></i>
+                                       
+                                </a>
+                                     @endif
+                                   @endcan
                                   
                            </div>
                     <div class="media-body">   
                           {{ $answer->body }}
                       <div class="row">
                         <div class="col-4">
-                            <div class="ml-auto">
+                            <div class="ml-auto mt-3">
                                     @can('update-answer',$answer)
                                     <a href="{{route('questions.answers.edit',[$question->id,$answer->id])}}"  class="btn btn-sm btn-outline-info">Edit</a>
                                 @endcan
@@ -45,16 +58,18 @@
 
                         <div class="col-4"></div>
                         <div class="col-4">
+                            <div class="float-right">
                                 <span class="text-muted">Answered {{$question->created_date}}</span>
                                 <div class="media">
                                     <a href="{{$question->user->url}}" class="pr-2">
                                             <img src="{{$answer->user->avatar}}">
                                         </a>
-                                        <div class="media-body">
+                                        
                                             <a href="{{$answer->user->url}}">{{$answer->user->name}}</a>
-                                        </div>
+                                    
                                 
                                 </div>
+                            </div>
                             </div>
                         </div>
                         
