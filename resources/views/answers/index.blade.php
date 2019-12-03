@@ -10,7 +10,7 @@
              
                @foreach ($question->answers as $answer)
                   <div class="media">
-                       <div class="d-flex flex-column vote-controls">
+                       <div class="d-fex flex-column vote-controls">
                                <a title="this answer isnuseful" class="vote-up">
                                   <i class="fa fa-caret-up fa-3x"></i>
                                </a>
@@ -18,15 +18,15 @@
                                <a title="this answer is not useful" class="vote-down off">
                                        <i class="fa fa-caret-down fa-3x"></i>
                                    </a>
-                                   <a title="mark as best answer (click again to undo)" class="vote-accepted mt-2">
+                                   <a title="mark as best answer (click again to undo)" class="{{$answer->status}} mt-2">
                                            <i class="fa fa-check fa-2x"></i>
-                                           <span class="favorites-count">1230</span>
+                                          
                                    </a>
                                   
                            </div>
-                       <div class="media-body">   
+                    <div class="media-body">   
                           {{ $answer->body }}
-                          <div class="row">
+                      <div class="row">
                         <div class="col-4">
                             <div class="ml-auto">
                                     @can('update-answer',$answer)
@@ -44,7 +44,7 @@
                         </div>
 
                         <div class="col-4"></div>
-                        <div class="col-4 ">
+                        <div class="col-4">
                                 <span class="text-muted">Answered {{$question->created_date}}</span>
                                 <div class="media">
                                     <a href="{{$question->user->url}}" class="pr-2">
@@ -58,7 +58,7 @@
                             </div>
                         </div>
                         
-                       </div>
+                       
 
                            </div>       
                        </div> 
@@ -68,3 +68,4 @@
                </div>
            </div>
         </div>
+    </div>

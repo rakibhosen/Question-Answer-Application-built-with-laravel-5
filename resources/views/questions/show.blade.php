@@ -35,21 +35,22 @@
                             {!! $question->body_html !!}
                             <div class="float-right  mt-3">
                                     <span class="text-muted">Question By{{$question->created_date}}</span>
-                                    <div class="media">
+                                    <div class="media mt-2">
                                         <a href="{{$question->user->url}}" class="pr-2">
                                                 <img src="{{$question->user->avatar}}">
                                             </a>
-                                            <div class="media-body">
+                                            <div class="media-body mt-1">
                                                 <a href="{{$question->user->url}}">{{$question->user->name}}</a>
                                             </div>
                                     
                                     </div>
                               </div>
-                        </div>
-                        </div>
+                          </div>
+                    </div>
                 </div>
             </div>
         </div>
+</div>
  
     
 @include('answers.index')

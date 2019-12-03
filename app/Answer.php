@@ -18,6 +18,7 @@ class Answer extends Model
     public function getBodyHtmlAttribute(){
         return \Parsedown::instance()->text($this->body);
     }
+
     public static function boot(){
         parent::boot();
         static::created(function($answer){
@@ -28,6 +29,10 @@ class Answer extends Model
         static::deleted(function ($answer){
             $answer->question->decrement('answers_count');
         });
+    }
+
+    public function getStatusAttribute(){
+        return $this->id === $this->question->best_answer_id ? 'vote-accepted':''; 
     }
 
 
