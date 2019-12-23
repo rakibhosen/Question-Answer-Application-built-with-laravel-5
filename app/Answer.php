@@ -32,7 +32,7 @@ class Answer extends Model
     }
 
     public function getStatusAttribute(){
-        return $this->isBest ? 'vote-accepted':''; 
+        return $this->isBest ? 'vote-accepted' : ''; 
     }
     public function getIsBestAttribute(){
         return $this->isBest();
