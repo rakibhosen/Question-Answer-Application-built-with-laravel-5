@@ -1,4 +1,5 @@
-@extends('layouts.app') @section('content')
+@extends('layouts.app')
+@section('content')
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-12">
@@ -20,7 +21,7 @@
                             class="vote-up {{ Auth::guest() ? 'off' : '' }}"
                             onclick="event.preventDefault(); document.getElementById('up-vote-question-{{ $question->id }}').submit();"
                             >
-                            <i class="fas fa-caret-up fa-3x"></i>
+                            <i class="fa fa-caret-up fa-3x"></i>
                         </a>
                         <form id="up-vote-question-{{ $question->id }}" action="/questions/{{ $question->id }}/vote" method="POST" style="display:none;">
                             @csrf
@@ -33,7 +34,7 @@
                             class="vote-down {{ Auth::guest() ? 'off' : '' }}"
                             onclick="event.preventDefault(); document.getElementById('down-vote-question-{{ $question->id }}').submit();"
                             >
-                            <i class="fas fa-caret-down fa-3x"></i>
+                            <i class="fa fa-caret-down fa-3x"></i>
                         </a>
                         <form id="down-vote-question-{{ $question->id }}" action="/questions/{{ $question->id }}/vote" method="POST" style="display:none;">
                             @csrf
