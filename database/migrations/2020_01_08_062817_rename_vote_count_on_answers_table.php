@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class RenameVotesOnQuestionsTable extends Migration
+class RenameVoteCountOnAnswersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class RenameVotesOnQuestionsTable extends Migration
      */
     public function up()
     {
-        Schema::table('questions', function (Blueprint $table) {
-          $table->renameColumn('vote','votes_count');
+        Schema::table('answers', function (Blueprint $table) {
+           $table->renameColumn('vote_count','votes_count');
         });
     }
 
@@ -25,8 +25,8 @@ class RenameVotesOnQuestionsTable extends Migration
      */
     public function down()
     {
-        Schema::table('questions', function (Blueprint $table) {
-            $table->renameColumn('votes_count','vote');
+        Schema::table('answers', function (Blueprint $table) {
+            $table->renameColumn('votes_count','vote_count');
         });
     }
 }

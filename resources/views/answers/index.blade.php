@@ -22,7 +22,7 @@
                         <input type="hidden" name="vote" value="1">
                     </form>
 
-                    <span class="votes-count">{{ $answer->vote_count }}</span>
+                    <span class="votes-count">{{ $answer->votes_count }}</span>
 
                     <a title="This answer is not useful" 
                         class="vote-down {{ Auth::guest() ? 'off' : '' }}"
