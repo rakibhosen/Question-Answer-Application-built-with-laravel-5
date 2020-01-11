@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.app') 
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
@@ -16,54 +16,20 @@
                     </div>
                     <hr>
                     <div class="media">
-                        <div class="d-fex flex-column vote-controls">
-                            <a title="This question is useful" 
-                            class="vote-up {{ Auth::guest() ? 'off' : '' }}"
-                            onclick="event.preventDefault(); document.getElementById('up-vote-question-{{ $question->id }}').submit();"
-                            >
-                            <i class="fa fa-caret-up fa-3x"></i>
-                        </a>
-                        <form id="up-vote-question-{{ $question->id }}" action="/questions/{{ $question->id }}/vote" method="POST" style="display:none;">
-                            @csrf
-                            <input type="hidden" name="vote" value="1">
-                        </form>
-
-                        <span class="votes-count">{{ $question->votes_count }}</span>
-
-                        <a title="This question is not useful" 
-                            class="vote-down {{ Auth::guest() ? 'off' : '' }}"
-                            onclick="event.preventDefault(); document.getElementById('down-vote-question-{{ $question->id }}').submit();"
-                            >
-                            <i class="fa fa-caret-down fa-3x"></i>
-                        </a>
-                        <form id="down-vote-question-{{ $question->id }}" action="/questions/{{ $question->id }}/vote" method="POST" style="display:none;">
-                            @csrf
-                            <input type="hidden" name="vote" value="-1">
-                        </form>
-
-                            <a title="Click to mark as favourite question (click again to undo)" class="favorite mt-2 {{Auth::guest() ? 'off':($question->is_favorited? 'favorited' : '')}}" onclick="event.preventDefault(); document.getElementById('favorite-question-{{$question->id }}').submit();">
-                                <i class="fa fa-star fa-3x"></i>
-                                <span class="favorites-count">{{$question->favorites_count}}</span>
-                    </a>
-
-                            <form id="favorite-question-{{$question->id }}" action="/questions/{{$question->id}}/favorites" method="post" style="display: none;">
-                                @csrf @if($question->is_favorited) @method('DELETE') @endif
-                            </form>
-
-                        </div>
+                        @include('shared._vote',[
+                            'model'=> $question
+                           
+                        ])
 
                         <div class="media-body">
                             {!! $question->body_html !!}
-                            <div class="float-right  mt-3">
-                                <span class="text-muted">Question By{{$question->created_date}}</span>
-                                <div class="media mt-2">
-                                    <a href="{{$question->user->url}}" class="pr-2">
-                                <img src="{{$question->user->avatar}}">
-                            </a>
-                                    <div class="media-body mt-1">
-                                        <a href="{{$question->user->url}}">{{$question->user->name}}</a>
-                                    </div>
-
+                            <div class="row">
+                                <div class="col-4"></div>
+                                <div class="col-4"></div>
+                                <div class="col-4">
+                                    @include('shared._author',[ 'model'=>$question, 
+                                    'label'=>'Asked'
+                                     ])
                                 </div>
                             </div>
                         </div>
